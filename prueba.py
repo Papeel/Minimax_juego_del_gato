@@ -15,23 +15,7 @@ actions ={
     "9": [0, 2],
 }
 
-def restart():
-    tablero = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ]
-    actions = {
-        "1": [2, 0],
-        "2": [2, 1],
-        "3": [2, 2],
-        "4": [1, 0],
-        "5": [1, 1],
-        "6": [1, 2],
-        "7": [0, 0],
-        "8": [0, 1],
-        "9": [0, 2],
-    }
+
 
 
 def isFinal(state):
@@ -115,70 +99,63 @@ def copy(old_list):
     return new_list
 
 
-while(True):
-    print(tablero[0])
-    print(tablero[1])
-    print(tablero[2])
-    valu=input("Tu turno: ")
-    act=actions[valu]
-    tablero[act[0]][act[1]]=1
-    del actions[valu]
-    if(isFinal(tablero)):
-        if(valida(tablero)==0 ):print("empate")
-        if (valida(tablero) == -1): print("Ganaste")
-        print(tablero)
-        break
-    valu=minimax(-1,copy(tablero),dict(actions))[1]
-    act = actions[valu]
-    tablero[act[0]][act[1]] = -1
-    del actions[valu]
-    if (isFinal(tablero)):
-        if (valida(tablero) == 0): print("empate")
-        if (valida(tablero) == 1): print("Perdiste")
-        print(tablero)
-        break
 
-tablero = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ]
-actions = {
-        "1": [2, 0],
-        "2": [2, 1],
-        "3": [2, 2],
-        "4": [1, 0],
-        "5": [1, 1],
-        "6": [1, 2],
-        "7": [0, 0],
-        "8": [0, 1],
-        "9": [0, 2],
-    }
+def game_player1(s,a):
 
-while(True):
-
-    valu=minimax(-1,copy(tablero),dict(actions))[1]
-    act = actions[valu]
-    tablero[act[0]][act[1]] = -1
-    del actions[valu]
-    if (isFinal(tablero)):
-        if (valida(tablero) == 0): print("empate")
-        if (valida(tablero) == 1): print("Perdiste")
-        print(tablero)
-        break
-
-    print(tablero[0])
-    print(tablero[1])
-    print(tablero[2])
-    valu = input("Tu turno: ")
-    act = actions[valu]
-    tablero[act[0]][act[1]] = 1
-    del actions[valu]
-    if (isFinal(tablero)):
-        if (valida(tablero) == 0): print("empate")
-        if (valida(tablero) == -1): print("Ganaste")
-        print(tablero)
-        break
+    while(True):
+        print(s[0])
+        print(s[1])
+        print(s[2])
+        valu=input("Tu turno: ")
+        act=a[valu]
+        s[act[0]][act[1]]=1
+        del a[valu]
+        if(isFinal(s)):
+            if(valida(s)==0 ):print("empate")
+            else: print("Ganaste")
+            print(s)
+            break
+        valu=minimax(-1,copy(s),dict(a))[1]
+        act = a[valu]
+        s[act[0]][act[1]] = -1
+        del a[valu]
+        if (isFinal(s)):
+            if (valida(s) == 0): print("empate")
+            else: print("Perdiste")
+            print(s)
+            break
 
 
+def game_player2(s,a):
+    while(True):
 
+        valu=minimax(-1,copy(s),dict(a))[1]
+        act = a[valu]
+        s[act[0]][act[1]] = -1
+        del a[valu]
+        if (isFinal(s)):
+            if (valida(s) == 0): print("empate")
+            else: print("Perdiste")
+            print(s)
+            break
+
+        print(s[0])
+        print(s[1])
+        print(s[2])
+        valu = input("Tu turno: ")
+        act = a[valu]
+        s[act[0]][act[1]] = 1
+        del a[valu]
+        if (isFinal(s)):
+            if (valida(s) == 0): print("empate")
+            else: print("Ganaste")
+            print(s)
+            break
+
+
+def game():
+    while(True):
+        player=input("Quiere ser jugador 1 o 2 :")
+        if(player=="1"):game_player1(copy(tablero),dict(actions))
+        else:game_player2(copy(tablero),dict(actions))
+game()
