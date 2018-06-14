@@ -131,6 +131,7 @@ class tabla:
         self.ventana.mainloop()
 
     def cambia(self,num):
+        if(not str(num+1) in self.actions):return
         self.listaBotones[num].config(text="X")
         act = self.actions[str(num+1)]
         self.state[act[0]][act[1]] = 1
