@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import *
 
-from tkinter import ttk
-from tkinter.tix import Select
+
 
 
 def isFinal(state):
